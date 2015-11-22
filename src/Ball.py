@@ -15,6 +15,7 @@ class Ball:
 
     def set_pos(self, pos):
         self.body.position = pos
+        self.rect.x, self.rect.y = pos
 
     def update(self):
         if self.body.position[1] < 0:
@@ -23,4 +24,4 @@ class Ball:
         self.body.reset_forces()
         for f in self.forces:
             self.body.apply_force(f)
-        self.rect.x, self.rect.y = self.body.position / 100
+        self.rect.x, self.rect.y = self.body.position

@@ -24,7 +24,7 @@ def main():
 
     gravity = pymunk.Vec2d(0, -9.81)
 
-    speed = [0.1, 0.1]
+    speed = [100, 0.1]
 
     black = 0, 0, 0
 
@@ -44,10 +44,12 @@ def main():
             if event.type == pygame.QUIT: return
 
         ball.update()
-        space.step(delta_t)
+        space.step(delta_t / 100.0)
 
         print(delta_t, ball.body.position)
         #pymunk.pygame_util.draw(screen, space)
+        screen.fill(black)
+        screen.blit(ball.image, ball.rect)
         pygame.display.flip()
 
 

@@ -3,6 +3,7 @@ import pygame
 import sys
 import pymunk
 import pymunk.pygame_util
+from Ball import Ball
 
 __author__ = 'xtofl'
 
@@ -23,20 +24,17 @@ def main():
 
     gravity = pymunk.Vec2d(0, -9.81)
 
-    speed = [1, 1]
+    speed = [0.1, 0.1]
 
     black = 0, 0, 0
 
-    ph_ball = pymunk.Body(mass=10.0, moment=1.0)
-    ph_ball.position = pymunk.Vec2d(200, 400)
-    ph_ball.apply_force(gravity)
+    ball = Ball()
+    ball.set_pos(pymunk.Vec2d(200, 400))
+    ball.forces.append(gravity)
 
-    space.add(ph_ball)
+    space.add(ball.body)
 
     screen = pygame.display.set_mode(size)
-
-    ball = pygame.image.load("ball.gif")
-    ballrect = ball.get_rect()
 
     clock = pygame.time.Clock()
 
@@ -45,12 +43,11 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT: return
 
-        if ph_ball.position[1] < 0:
-            ph_ball.velocity = (ph_ball.velocity[0], -ph_ball.velocity[1])
+        ball.update()
         space.step(delta_t)
-        ballrect = ballrect.move(ph_ball.position)
-        print(delta_t, ph_ball.position)
-        pymunk.pygame_util.draw(screen, space)
+
+        print(delta_t, ball.body.position)
+        #pymunk.pygame_util.draw(screen, space)
         pygame.display.flip()
 
 

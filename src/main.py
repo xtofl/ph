@@ -13,10 +13,10 @@ from logging import info
 
 def main():
     pygame.init()
-    world = World()
+    world = World(screen_size=(600, 600), one_second=1000.)
 
     ball = Ball()
-    ball.set_pos(pymunk.Vec2d(2.0, 4.0))
+    ball.set_pos(pymunk.Vec2d(2.0, 8.0))
     ball.body.velocity = pymunk.Vec2d(1.0, 1.0)
 
     world.add(ball)

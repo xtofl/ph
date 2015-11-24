@@ -9,7 +9,7 @@ black = 0, 0, 0
 
 class World:
 
-    def __init__(self, screen_size=(600, 600)):
+    def __init__(self, screen_size=(600, 600), one_second=500.):
         size = screen_size
 
         space = pymunk.Space()
@@ -28,6 +28,7 @@ class World:
         self.gravity = pymunk.Vec2d(0, -9.81)
         self.objects = []
         self.clock = pygame.time.Clock()
+        self.one_second = one_second
 
     def add(self, obj):
         self.objects.append(obj)
@@ -40,7 +41,7 @@ class World:
         for o in self.objects:
             o.update()
 
-        self.space.step(delta_t / 100.0)
+        self.space.step(delta_t / self.one_second)
 
     def draw(self):
         #pymunk.pygame_util.draw(screen, space)

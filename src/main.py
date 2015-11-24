@@ -26,12 +26,11 @@ def main():
 
     gravity = pymunk.Vec2d(0, -9.81)
 
-    speed = [.1, 0.1]
-
     black = 0, 0, 0
 
     ball = Ball()
     ball.set_pos(pymunk.Vec2d(2.0, 4.0))
+    ball.body.velocity = pymunk.Vec2d(1.0, 1.0)
     ball.forces.append(gravity)
 
     space.add(ball.body)
@@ -46,7 +45,7 @@ def main():
             if event.type == pygame.QUIT: return
 
         ball.update()
-        space.step(delta_t / 1000.0)
+        space.step(delta_t / 100.0)
 
         #pymunk.pygame_util.draw(screen, space)
         screen.fill(black)

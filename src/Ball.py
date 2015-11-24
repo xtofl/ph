@@ -21,6 +21,9 @@ class Ball:
         if self.body.position[1] < 0:
             self.body.velocity[1] *= -1
 
+        if self.body.position[0] < 0 or self.body.position[0] > 10.0:
+            self.body.velocity[0] *= -1
+
         self.body.reset_forces()
         for f in self.forces:
             self.body.apply_force(f)
